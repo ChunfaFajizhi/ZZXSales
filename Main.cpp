@@ -1,0 +1,87 @@
+//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#pragma hdrstop
+
+#include "Main.h"
+#include "datamod.h"
+#include "brcstord.h"
+#include "edorders.h"
+#include "brparts.h"
+#include "Employee.h"
+#include "OrderList.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+TMainForm *MainForm;
+//---------------------------------------------------------------------------
+__fastcall TMainForm::TMainForm(TComponent* Owner)
+        : TForm(Owner)
+{
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TMainForm::FormCreate(TObject *Sender)
+{
+ ClientWidth = StaticsBtn->Left + StaticsBtn->Width + 5;
+   ClientHeight = StaticsBtn->Top + StaticsBtn->Height-15;
+   MainPanel->Align = alClient;
+   // position the form at the top of display
+   Left = 10;
+   Top = 10;
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::BrowseBtnClick(TObject *Sender)
+{
+ ZZXData->Cust->Active=True;
+ ZZXData->OrderByCust->Active=True;
+ BrCustOrdForm->Show();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::OrderBtnClick(TObject *Sender)
+{ ZZXData->Orders->Active=True;
+  ZZXData->CustByOrd->Active=True;
+  ZZXData->Products->Active=True;
+  ZZXData->CustByComp->Active=True;
+  ZZXData->Emps->Active=True;
+ 
+  EdOrderForm->CustAddEdit->Clear();
+  EdOrderForm->CustCityEdit->Clear();
+  EdOrderForm->CustStateEdit->Clear();
+  EdOrderForm->CustZipEdit->Clear();
+  EdOrderForm->ShowModal();
+  EdOrderForm->Left=45;
+  EdOrderForm->Top=45;
+  ZZXData->Orders->Last();
+  
+}
+//---------------------------------------------------------------------------
+
+
+
+void __fastcall TMainForm::PartsBtnClick(TObject *Sender)
+{
+ ZZXData->Products->Active=True;
+BrPartsForm->ShowModal();
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TMainForm::EmployeeClick(TObject *Sender)
+{
+ZZXData->Emps->Active=True;
+Empform->ShowModal();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::OrderListClick(TObject *Sender)
+{
+ZZXData->Orders->Active=True;
+OrderForm->ShowModal();
+}
+//---------------------------------------------------------------------------
+
